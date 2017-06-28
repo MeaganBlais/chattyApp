@@ -5,13 +5,13 @@ class Message extends Component {
   render() {
     // console.log('Message')
 
-const {username, body} = this.props;
-                            console.log('key', body)
+const {username, content} = this.props;
+  // console.log('key', content)
     return (
       <div>
         <div className="message">
           <span className="message-username">{username}</span>
-        <span className="message-content">{body}</span>
+          <span className="message-content">{content}</span>
         </div>
         <div className="message system">
           "message system"

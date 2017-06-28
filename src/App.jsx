@@ -15,42 +15,49 @@ class App extends Component {
         {
           id: 1,
           username: "Anonymous",
-          body: "What's this new app about?"
+          content: "What's this new app about?"
         },
         {
           id: 2,
           username: "Bob",
-          body: "Anyone out there?"
+          content: "Anyone out there?"
         }
       ]
+    }
   }
 
-
+  // function takes full input from ChatBar message and appends it to the 'this.state' variable using concat
+  handleSubmitMessage(content) {
+    this.setState({
+      messages: this.state.messages.concat({id:this.state.messages.length + 1, username:this.state.currentUser, content:content})
+    })
   }
-
 
   componentDidMount() {
-    // console.log('componentDidMount', this.state)
+    // console.log('componentDidMount <App/>')
     setTimeout(() => {
-      this.setState({loading: true})
-    }, 2000)
-  }
+      console.log('Simulating incoming message');
+      // Add a new message to the list of messages in the data store
+      const newMessage = {id: 3, username: "Michelle", content: "Hello, there!"}
+      const messages = this.state.messages.concat(newMessage)
+      //Update the state of the app component.
+      //Calling setState will trigger a call to render() in App and all child components.
+      this.setState({messages: messages})
+    }, 3000);
+}
 
   render() {
     // console.log('App');
-    if(this.state.loading) {
       return (
         <div>
           <nav className="navbar">
             <a href="/" className="navbar-brand">Chatty</a>
           </nav>
           <MessageList messages={this.state.messages}/>
-          <ChatBar currentUser={this.state.currentUser}/>
+          <ChatBar currentUser={this.state.currentUser} handleSubmitMessage={this.handleSubmitMessage.bind(this)}/>
         </div>
       );
-    } else {
-      return <h1>3 seconds have elapsed and page is loading</h1>
-    }
   }
 }
+
 export default App;

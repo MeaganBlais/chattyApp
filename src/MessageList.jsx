@@ -7,13 +7,13 @@ class MessageList extends Component {
     // console.log('MessageList', this.props.messages[0])
 
     const {messages} = this.props;
-    console.log("1", messages[0])
+    // console.log("1", messages[0])
     return (
       // grabbing the messages prop and looping through each item
       <div className="messages">
         {messages.map((message, index) => {
           return (
-            <Message key={index} username={message.username}   body={message.body}/>
+            <Message key={index} username={message.username}   content={message.content}/>
           )}
         )};
 
