@@ -4,11 +4,20 @@ import Message from './Message.jsx';
 
 class MessageList extends Component {
   render() {
-    console.log('MessageList')
+    // console.log('MessageList', this.props.messages[0])
+
+    const {messages} = this.props;
+    console.log("1", messages[0])
     return (
-      <main className="messages">
-        <Message/>
-      </main>
+      // grabbing the messages prop and looping through each item
+      <div className="messages">
+        {messages.map((message, index) => {
+          return (
+            <Message key={index} username={message.username}   body={message.body}/>
+          )}
+        )};
+
+     </div>
     );
   }
 }
