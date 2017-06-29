@@ -2,10 +2,11 @@ import React, {Component} from 'react';
 import ChatBar from './ChatBar.jsx'
 import MessageList from './MessageList.jsx'
 
-
+const socket = new WebSocket('ws://localhost:3001');
 
 //setting state to include all props necessary for app
 class App extends Component {
+
   constructor(props) {
     // console.log('setting constructor')
     super(props);
@@ -24,6 +25,7 @@ class App extends Component {
         }
       ]
     }
+    this.socket = new WebSocket('ws://localhost:3001');
   }
 
   // function takes full input from ChatBar message and appends it to the 'this.state' variable using concat
@@ -35,6 +37,12 @@ class App extends Component {
 
   componentDidMount() {
     // console.log('componentDidMount <App/>')
+    socket.onopen = function (event) {
+      // socket.send("")
+      console.log('connected')
+    }
+
+
     setTimeout(() => {
       console.log('Simulating incoming message');
       // Add a new message to the list of messages in the data store
