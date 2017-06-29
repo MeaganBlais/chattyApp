@@ -33,12 +33,18 @@ class App extends Component {
     this.setState({
       messages: this.state.messages.concat({id:this.state.messages.length + 1, username:this.state.currentUser, content:content})
     })
+
+    var msg = {
+      username: document.getElementById('username').value,
+      content: content
+    }
+    socket.send(JSON.stringify(msg));
+    // console.log('content', content)
   }
 
   componentDidMount() {
     // console.log('componentDidMount <App/>')
     socket.onopen = function (event) {
-      // socket.send("")
       console.log('connected')
     }
 
