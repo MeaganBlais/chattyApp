@@ -3,10 +3,12 @@ import React, {Component} from 'react';
 
 class Message extends Component {
   render() {
-    // console.log('Message')
+    // console.log('Message') // 1st step/check used to understand order components are called
 
 const {username, content} = this.props;
-  // console.log('key', content)
+  // console.log('content', content) 
+
+
     return (
       <div>
         <div className="message">

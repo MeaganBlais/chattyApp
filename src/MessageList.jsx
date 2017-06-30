@@ -8,6 +8,7 @@ class MessageList extends Component {
 
     const {messages} = this.props;
     // console.log("1", messages[0])
+    // console.log("messages", messages) // Michelle's static input
     return (
       // grabbing the messages prop and looping through each item
       <div className="messages">
@@ -19,6 +20,7 @@ class MessageList extends Component {
 
      </div>
     );
+    console.log("message", message)
   }
 }
 export default MessageList;
