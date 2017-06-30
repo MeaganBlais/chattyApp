@@ -15,8 +15,8 @@ class ChatBar extends Component {
 // and resets the input field to an empty string
   handleMessageChange (e) {
     if (e.key === "Enter") {
-      this.props.handleSubmitMessage(this.state.content);
-      this.state.content = ""
+      this.props.handleSubmitMessage(this.state.content)
+      this.state.content = "";
     } else {
       this.setState({content:this.state.content + e.key})
     }

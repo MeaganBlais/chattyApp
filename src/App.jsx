@@ -11,30 +11,19 @@ class App extends Component {
     // console.log('setting constructor')
     super(props);
     this.state = {
-      currentUser: "Bob",
-      messages: [
-        {
-          id: 1,
-          username: "Anonymous",
-          content: "What's this new app about?"
-        },
-        {
-          id: 2,
-          username: "Bob",
-          content: "Anyone out there?"
-        }
-      ]
+      currentUser: {name: "Bob"},
+      messages: []
     }
     this.socket = new WebSocket('ws://localhost:3001');
   }
 
   // function takes full input from ChatBar message and appends it to the 'this.state' variable using concat
   handleSubmitMessage(content) {
-    this.setState({
-      messages: this.state.messages.concat({id:this.state.messages.length + 1, username:this.state.currentUser, content:content})
-    })
+    // this.setState({
+    //   messages: this.state.messages.concat({id:this.state.messages.length + 1, username:this.state.currentUser, content:content})
+    // })
 
-    var msg = {
+    let msg = {
       username: document.getElementById('username').value,
       content: content
     }
@@ -44,8 +33,28 @@ class App extends Component {
 
   componentDidMount() {
     // console.log('componentDidMount <App/>')
-    socket.onopen = function (event) {
+    socket.onopen = (event) =>  {
+
       console.log('connected')
+    }
+
+    socket.onmessage = (event) => {
+      // console.log('event', event);
+      let msg = JSON.parse(event.data);
+      console.log('msg', msg)
+      console.log('before', this.state)
+      switch(msg.type) {
+        case "message":
+        this.setState((prevState) => {
+          prevState.messages.push(msg);
+          this.setState({messages: prevState.messages});
+        });
+        console.log('after', this.state)
+  break;
+      // this.setState({
+      //
+      // })
+      }
     }
 
 
@@ -68,7 +77,7 @@ class App extends Component {
             <a href="/" className="navbar-brand">Chatty</a>
           </nav>
           <MessageList messages={this.state.messages}/>
-          <ChatBar currentUser={this.state.currentUser} handleSubmitMessage={this.handleSubmitMessage.bind(this)}/>
+          <ChatBar currentUser={this.state.currentUser.name} handleSubmitMessage={this.handleSubmitMessage.bind(this)}/>
         </div>
       );
   }
