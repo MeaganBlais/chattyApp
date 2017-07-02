@@ -3,21 +3,17 @@ import React, {Component} from 'react';
 
 class Notification extends Component {
   render() {
-    // console.log('Message') // 1st step/check used to understand order components are called
 
-const {newName, content, oldName} = this.props;
-  // console.log('content', content)
-
-
-    return (
-      <div>
-        <div className="notification">
-          <span className="notification-oldName">{oldName}</span>
-          <span className="notification-content">{content}</span>
-          <span className="notification-newName">{newName}</span>
+    const {newName, content, oldName} = this.props;
+      return (
+        <div>
+          <div className="notification">
+            <span className="notification-oldName">{oldName}</span>
+            <span className="notification-content">{content}</span>
+            <span className="notification-newName">{newName}</span>
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
   }
-}
 export default Notification;

@@ -10,5 +10,6 @@ import App from './App.jsx';
 import ChatBar from './ChatBar.jsx';
 import Message from './Message.jsx';
 import MessageList from './MessageList.jsx';
+import Notification from './Notification.jsx';
 
 ReactDOM.render(<App />, document.getElementById('react-root'));

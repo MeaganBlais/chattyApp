@@ -3,7 +3,6 @@ import React, {Component} from 'react';
 
 class ChatBar extends Component {
   constructor(props) {
-    // console.log('setting constructor')
     super(props);
     this.state = {
       type: "postMessage",
@@ -30,7 +29,6 @@ class ChatBar extends Component {
   }
 
   handleUserChange (e) {
-    console.log('testingEnter')
     if (e.key === "Enter") {
       this.props.handleSubmitUser(this.state.username)
       this.setState({username:""});

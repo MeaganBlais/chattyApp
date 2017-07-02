@@ -11,7 +11,7 @@ class App extends Component {
     // console.log('setting constructor')
     super(props);
     this.state = {
-      currentUser: {name: "Anonymous", oldName: "Anonymous"},
+      currentUser: {name: "Anonymous"},
       messages: [], // array of objects with 5 keys: username, content & id, name, oldName
       clientSize: 0
     }
@@ -32,12 +32,24 @@ class App extends Component {
   }
 
   handleSubmitUser(username) {
+    //save oldName & newName
+    let oldName = this.state.currentUser.name;
+    let newName = document.getElementById('username').value;
 
-    let currentUser = {
-      name: document.getElementById('username').value,
+    // update the current user name to new name
+    this.setState((prevState) => {
+      return {currentUser: {name: newName}}
+    })
+
+    //send server oldName & newName
+    if (newName !== oldName) {
+    let user = {
+      newName: document.getElementById('username').value,
+      oldName: oldName,
       type: "postNotification"
     }
-    socket.send(JSON.stringify(currentUser));
+    socket.send(JSON.stringify(user));
+    }
   }
 
   // self explanatory
@@ -52,50 +64,36 @@ class App extends Component {
       // parse the input
       let data = JSON.parse(event.data);
 
-      // boolean to check for 'type' of input
-      switch(data.type) { // defined on server side
+      // boolean to check for 'type' of input - defined on server side
+      switch(data.type) {
         case "incomingMessage":
-        this.setState((prevState) => {
-          const messages = [].concat(prevState.messages).concat(data)
-          return {messages: messages}
-        });
+          this.setState((prevState) => {
+            let messages = [].concat(prevState.messages).concat(data)
+            return {messages: messages}
+          });
           break;
 
-
-          case "incomingNotification":
-
+        case "incomingNotification":
           this.setState((prevState) => {
-            const newUsername = data.name;
-            const oldUsername = prevState.currentUser.name;
-
+            let newUsername = data.newName;
+            let oldUsername = data.oldName;
             let notificationContent = {
               oldName: oldUsername,
               newName: newUsername,
               content: " changed name to ",
               type: "incomingNotification"
             }
-
-            const messages = [].concat(prevState.messages).concat(notificationContent)
+            let messages = [].concat(prevState.messages).concat(notificationContent)
 
             return {messages: messages}
           });
             break;
 
             case "clientsConnected":
-            console.log('data', data)
-
-            //document.getElementById();
-
-            this.setState((prevState) => {
+              this.setState((prevState) => {
               return {clientSize: data.clientSize}
-            })
-            console.log('clientState', this.state.clientSize)
-
-
+              })
             break;
-
-
-
           default:
           // show an erro in the console if the message type in unknown
           throw new Error("Unknown event type" + data.type);
@@ -103,20 +101,8 @@ class App extends Component {
     };
 
     setTimeout(() => {
-
-      console.log('Simulating incoming message');
-      // Add a new message to the list of messages in the data store
-      const newMessage = {id: 3, username: "Michelle", content: "Hello, there!"}
-
-      //Update the state of the app component.
-      const messages = this.state.messages.concat(newMessage)
-
-      //Calling setState will trigger a call to render() in App and all child components.
-      this.setState({messages: messages})
     }, 3000);
 }
-
-
 
   render() {
       return (
@@ -124,7 +110,6 @@ class App extends Component {
           <nav className="navbar">
             <a href="/" className="navbar-brand">Chatty</a>
             <h2>{this.state.clientSize} users online</h2>
-
           </nav>
           <MessageList messages={this.state.messages} currentUser={this.state.currentUser}/>
           <ChatBar handleSubmitUser={this.handleSubmitUser.bind(this)} handleSubmitMessage={this.handleSubmitMessage.bind(this)} currentUser={this.state.currentUser}/>

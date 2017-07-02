@@ -25,7 +25,6 @@ class MessageList extends Component {
           )};
         )
        </div>
-
      </div>
     );
   }
