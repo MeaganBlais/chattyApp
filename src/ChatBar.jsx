@@ -19,8 +19,6 @@ class ChatBar extends Component {
     if (e.key === "Enter") {
       this.props.handleSubmitMessage(this.state.content)
       this.setState({content:""});
-      // console.log('state', this.state)
-    // } else if (e.key === "backspace") {
     } else if (e.key === "Backspace") {
       // this.props.handleSubmitMessage(this.state.content)
       this.setState({content:this.state.content.substring(0, this.state.content.length-1)})
@@ -29,11 +27,9 @@ class ChatBar extends Component {
     } else {
       this.setState({content:this.state.content + e.key})
     }
-    // console.log('test', this.state)
   }
 
   handleUserChange (e) {
-    // console.log('e', e)
     console.log('testingEnter')
     if (e.key === "Enter") {
       this.props.handleSubmitUser(this.state.username)
@@ -46,8 +42,6 @@ class ChatBar extends Component {
   }
 
   render() {
-    // console.log('ChatBar')
-    // console.log(this.props.username, 'besties')
     return (
       <footer className="chatbar">
         <input className="chatbar-username" id="username" defaultValue={this.props.currentUser.name} onKeyUp={this.handleUserChange.bind(this)} />
