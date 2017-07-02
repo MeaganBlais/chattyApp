@@ -6,6 +6,7 @@ class ChatBar extends Component {
     // console.log('setting constructor')
     super(props);
     this.state = {
+      type: "postMessage",
       content: "",
       username: ""
     }
@@ -18,10 +19,13 @@ class ChatBar extends Component {
     if (e.key === "Enter") {
       this.props.handleSubmitMessage(this.state.content)
       this.setState({content:""});
+      // console.log('state', this.state)
     // } else if (e.key === "backspace") {
     } else if (e.key === "Backspace") {
       // this.props.handleSubmitMessage(this.state.content)
       this.setState({content:this.state.content.substring(0, this.state.content.length-1)})
+    } else if (e.key === "Tab"){
+      this.setState({content:this.state.content})
     } else {
       this.setState({content:this.state.content + e.key})
     }
@@ -30,6 +34,7 @@ class ChatBar extends Component {
 
   handleUserChange (e) {
     // console.log('e', e)
+    console.log('testingEnter')
     if (e.key === "Enter") {
       this.props.handleSubmitUser(this.state.username)
       this.setState({username:""});
@@ -41,10 +46,11 @@ class ChatBar extends Component {
   }
 
   render() {
-    console.log('ChatBar')
+    // console.log('ChatBar')
+    // console.log(this.props.username, 'besties')
     return (
       <footer className="chatbar">
-        <input className="chatbar-username" id="username" value={this.state.username} onKeyUp={this.handleUserChange.bind(this)} />
+        <input className="chatbar-username" id="username" defaultValue={this.props.currentUser.name} onKeyUp={this.handleUserChange.bind(this)} />
         <input className="chatbar-message" value={this.state.content} onKeyUp={this.handleMessageChange.bind(this)} />
       </footer>
     );

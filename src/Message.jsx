@@ -6,7 +6,7 @@ class Message extends Component {
     // console.log('Message') // 1st step/check used to understand order components are called
 
 const {username, content} = this.props;
-  // console.log('content', content) 
+  // console.log('content', content)
 
 
     return (
@@ -14,9 +14,6 @@ const {username, content} = this.props;
         <div className="message">
           <span className="message-username">{username}</span>
           <span className="message-content">{content}</span>
-        </div>
-        <div className="message system">
-          "message system"
         </div>
       </div>
     );
