@@ -47,3 +47,7 @@ npm run lint
 * Webpack
 * [babel-loader](https://github.com/babel/babel-loader)
 * [webpack-dev-server](https://github.com/webpack/webpack-dev-server)
+
+![alt tag](https://github.com/MeaganBlais/chattyApp/blob/master/build/2%20users.png "2 users")
+![alt tag](https://github.com/MeaganBlais/chattyApp/blob/master/build/Basic%20Page.png "Basic Page")
+![alt tag](https://github.com/MeaganBlais/chattyApp/blob/master/build/Conversations%20%26%20Name%20Change.png "Convo & Name Change")
