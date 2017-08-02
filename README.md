@@ -22,6 +22,10 @@ npm install
 npm start
 open http://localhost:3000
 ```
+```
+Start chatty server
+node server.js
+```
 
 ### Static Files
 
