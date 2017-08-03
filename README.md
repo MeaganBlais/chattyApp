@@ -15,23 +15,19 @@ git remote add origin [YOUR NEW REPOSITORY]
 # Manually update your package.json file
 ```
 
-Install the dependencies and start the server.
+Install the dependencies and start the servers.
 
+Start chattyApp server
 ```
 npm install
 npm start
 open http://localhost:3000
 ```
+Start chatty_server
 ```
-Start chatty server
+npm install
 node server.js
 ```
-
-### Static Files
-
-You can store static files like images, fonts, etc in the `build` folder.
-
-For example, if you copy a file called my_image.png into the build folder you can access it using `http://localhost:3000/build/my_image.png`.
 
 ### Linting
 
@@ -48,6 +44,4 @@ npm run lint
 * [babel-loader](https://github.com/babel/babel-loader)
 * [webpack-dev-server](https://github.com/webpack/webpack-dev-server)
 
-![alt tag](https://github.com/MeaganBlais/chattyApp/blob/master/build/2%20users.png "2 users")
-![alt tag](https://github.com/MeaganBlais/chattyApp/blob/master/build/Basic%20Page.png "Basic Page")
-![alt tag](https://github.com/MeaganBlais/chattyApp/blob/master/build/Conversations%20%26%20Name%20Change.png "Convo & Name Change")
+![alt tag](https://github.com/MeaganBlais/chattyApp/blob/master/build/live_chat.png "live chat")

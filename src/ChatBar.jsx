@@ -21,8 +21,10 @@ class ChatBar extends Component {
     } else if (e.key === "Backspace") {
       // this.props.handleSubmitMessage(this.state.content)
       this.setState({content:this.state.content.substring(0, this.state.content.length-1)})
-    } else if (e.key === "Tab"){
+    } else if (e.key === "Tab" || e.key === "Shift"){
       this.setState({content:this.state.content})
+    } else if (e.key === "Shift") {
+      this.setState({content:this.state.conent + e.key.toUpperCase()})
     } else {
       this.setState({content:this.state.content + e.key})
     }
@@ -34,6 +36,8 @@ class ChatBar extends Component {
       this.setState({username:""});
     } else if (e.key === "Backspace") {
       this.setState({username: this.state.username.substring(0, this.state.username.length-1)})
+    } else  if (e.key === "Shift") {
+      this.setState({username:this.state.username})
     } else {
       this.setState({username:this.state.username + e.key})
     }
